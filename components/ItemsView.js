@@ -1,6 +1,8 @@
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import Items from './Items.js';
-import 'materialize-css';
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
+
 
 class ItemsView extends Component{
     constructor(props){
@@ -9,25 +11,27 @@ class ItemsView extends Component{
     render(){
         let itemList = Items.map(item =>{
             return (
-                <div className="card" key={item.id}>
+                <View className="card" key={item.id}>
                     
-                    <div className="container">
-                    <img src={item.src} className = "Picture" alt={item.title}/>
-                    <span to="/" className="btn-floating halfway-fab waves-effect waves-light blue-grey" onClick={() => this.props.addItem(item.id)}><i className="material-icons">add_shopping_cart</i></span>
-                    </div>
+                    <View className="container">
+                    <Button
+          title="add"
+          onPress={() => this.props.addItem(item.id)}
+        />
+                    </View>
 
 
-                    <div className="card-content">
-                    <p><b>{item.desc}</b></p>
-                    <p><b>Price: ${item.price}</b></p>
-                    </div>
-                </div>
+                    <View className="card-content">
+                    <Text>{item.desc}</Text>
+                    <Text>Price: ${item.price}</Text>
+                    </View>
+                </View>
             )
         })
         return(
-            <div className="box">
+            <View className="box">
                 {itemList}
-            </div>
+            </View>
         );
     }
 }
