@@ -1,6 +1,8 @@
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
+
 import Items from './Items.js';
-import 'materialize-css';
 
 class Cart extends Component {
     constructor(props){
@@ -38,22 +40,28 @@ class Cart extends Component {
             }
 
             return(
-                <div className="cart" key={key}>
-                <h9> descr: {desc} </h9>
-                <h10> amount: {item[0]} </h10>
-                <h10> id: {item[1]} </h10>
-                <a className="waves-effect waves-light btn-small blue" onClick={() => {this.props.deleteCartItem(item[1]);}}><i className="material-icons">remove</i></a>
-                <a className="waves-effect waves-light btn-small red" onClick={() => {this.props.addCartItem(item[1]);}}><i className="material-icons">add</i></a>
-            </div>
+                <View>
+                    <Text> descr: {desc} </Text>
+                    <Text> amount: {item[0]} </Text>
+                    <Text> id: {item[1]} </Text>
+                    <Button
+                    title="remove"
+                    onPress={() => this.props.deleteCartItem(item[1])}
+                    />
+                    <Button
+                    title="add"
+                    onPress={() => this.props.addCartItem(item[1])}
+                    />
+                </View>
             );
         })
         return(
-            <div>
-                <h5>{numItems} items in cart</h5>
+            <View>
+                <Text>{numItems} items in cart</Text>
                 {cartList}
-                <h6>Total: ${total}</h6>
-                <h7>After tax: ${Math.round((total * 1.13 + Number.EPSILON) * 100) / 100}</h7>
-            </div>
+                <Text>Total: ${total}</Text>
+                <Text>After tax: ${Math.round((total * 1.13 + Number.EPSILON) * 100) / 100}</Text>
+            </View>
         );
     }
 }
